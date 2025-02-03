@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <NavBar/>
-      {/* <CreateBlog/> */}  //commented out to test git
+      <CreateBlog/>
     </>
   )
 }
