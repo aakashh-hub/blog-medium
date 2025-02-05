@@ -102,7 +102,7 @@ const BlogDetail = ({ blogs, onUpdate }) => {
             </svg>
             <span className="ml-1 font-bold text-lg">Back</span>
           </Link>
-          <h1 className="flex text-5xl font-bold justify-center">{blog.title}</h1>
+          <h1 className="flex text-5xl m-3 font-bold justify-center">{blog.title}</h1>
           {blog.image && (
             <img src={blog.image} alt="Blog" className="w-full my-4" />
           )}

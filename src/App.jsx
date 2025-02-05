@@ -81,7 +81,18 @@ function App() {
         />
         <Route path="/addBlog" element={<CreateBlog onAddBlog={handleAdd} />} />
         <Route path="/blog/:index" element={<BlogDetail blogs={blogs} onUpdate={handleUpdate} />} />
-        <Route path="/authors" element={<Authors blogs={blogs}/>}/>
+        <Route 
+          path="/authors" 
+          element={
+            <div className="mx-auto">
+              {
+                blogs.map((blog, index) => (
+                  <Authors key={index} blog={blog} index={index}/>
+                ))
+              }
+            </div>
+          }
+        />
       </Routes>
     </>
   );
