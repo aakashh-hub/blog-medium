@@ -4,6 +4,7 @@ import CreateBlog from "./components/CreateBlog";
 import NavBar from "./components/NavBar";
 import Card from "./components/Card";
 import BlogDetail from "./components/BlogDetail";
+import CoverPage from "./components/CoverPage";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -45,13 +46,19 @@ function App() {
     <>
       <NavBar />
       <Routes>
+
         <Route
           path="/"
           element={
-            <div className="container mx-auto p-4">
-              {blogs.map((blog, index) => (
-                <Card key={index} blog={blog} index={index} onDelete={handleDelete} onLike={handleLike} />
-              ))}
+            <div>
+              <div className="flex justify-center">
+                <CoverPage />
+              </div>
+              <div className="container mx-auto p-4">
+                {blogs.map((blog, index) => (
+                  <Card key={index} blog={blog} index={index} onDelete={handleDelete} onLike={handleLike} />
+                ))}
+              </div>
             </div>
           }
         />
