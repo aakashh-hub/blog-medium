@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const BlogDetail = ({ blogs, onUpdate }) => {
   const { index } = useParams();
@@ -36,31 +37,40 @@ const BlogDetail = ({ blogs, onUpdate }) => {
   return (
     <div className="container mx-auto p-4">
       {isEditing ? (
-        <form onSubmit={handleEditSubmit}>
-          <input
-            type="text"
-            name="title"
-            value={editedBlog.title}
-            onChange={handleEditChange}
-            className="text-xl font-bold"
-          />
-          <textarea
-            name="description"
-            value={editedBlog.description}
-            onChange={handleEditChange}
-            className="text-sm"
-          />
-          <textarea
-            name="blogContent"
-            value={editedBlog.blogContent}
-            onChange={handleEditChange}
-            className="w-full"
-          />
-          <button type="submit" className="text-blue-500">Save</button>
-        </form>
+        <div>
+          <form onSubmit={handleEditSubmit}>
+            <input
+              type="text"
+              name="title"
+              value={editedBlog.title}
+              onChange={handleEditChange}
+              className="text-xl font-bold"
+            />
+            <textarea
+              name="description"
+              value={editedBlog.description}
+              onChange={handleEditChange}
+              className="text-sm"
+            />
+            <textarea
+              name="blogContent"
+              value={editedBlog.blogContent}
+              onChange={handleEditChange}
+              className="w-full"
+            />
+            <button type="submit" className="text-blue-500">Save</button>
+          </form>
+        </div>
       ) : (
         <div>
-          <h2 className="text-xl font-bold">{blog.title}</h2>
+          <Link to="/" className="inline-flex items-center border border-black px-3 py-1.5 rounded-md text-black hover:bg-blue-50">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18">
+              </path>
+            </svg>
+            <span className="ml-1 font-bold text-lg">Back</span>
+          </Link>
+          <h1 className="flex text-5xl font-bold justify-center">{blog.title}</h1>
           {blog.image && (
             <img src={blog.image} alt="Blog" className="w-full my-4" />
           )}

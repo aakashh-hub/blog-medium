@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CreateBlog = ({ onAddBlog }) => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,11 @@ const CreateBlog = ({ onAddBlog }) => {
     };
     onAddBlog(newBlog);
     navigate('/');
+    Swal.fire({
+      title: "Good job!",
+      text: "You clicked the button!",
+      icon: "success"
+    });
   };
 
   return (
