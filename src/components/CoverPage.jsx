@@ -4,7 +4,7 @@ const CoverPage = () => {
   return (
     <div>
       <img 
-        src={'src/assets/cover page.png'}
+        src="https://cdn-images-1.medium.com/max/2400/1*P81ck71Q_5PJGkKr3YP_2w.png"
       />
     </div>
   )
