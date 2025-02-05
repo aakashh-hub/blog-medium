@@ -40,8 +40,8 @@ const CreateBlog = ({ onAddBlog }) => {
     onAddBlog(newBlog);
     navigate('/');
     Swal.fire({
-      title: "Good job!",
-      text: "You clicked the button!",
+      title: "Great!",
+      text: "Your blog has been published!",
       icon: "success"
     });
   };

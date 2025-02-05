@@ -75,8 +75,8 @@ const BlogDetail = ({ blogs, onUpdate }) => {
             <img src={blog.image} alt="Blog" className="w-full my-4" />
           )}
           <p className="text-sm text-gray-600">By {blog.author}</p>
-          <p className="text-sm">{blog.description}</p>
-          <p className="text-sm">{blog.blogContent}</p>
+          {/* <p className="text-sm">{blog.description}</p> */}
+          <p className="text-xl">{blog.blogContent}</p>
           <div className="flex gap-2 mt-2">
             <button className="text-blue-500" onClick={() => onUpdate(index, { ...blog, likes: blog.likes + 1 })}>
               Like ({blog.likes})
@@ -97,10 +97,10 @@ const BlogDetail = ({ blogs, onUpdate }) => {
                 type="text"
                 value={newComment}
                 onChange={handleNewCommentChange}
-                className="border p-1 my-2"
+                className="border p-1 my-2 rounded-lg"
                 placeholder="Add a comment"
               />
-              <button type="submit" className="text-blue-500">Add Comment</button>
+              <button type="submit" className="mx-2 text-blue-500">Add Comment</button>
             </form>
           </div>
         </div>
