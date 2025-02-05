@@ -51,7 +51,6 @@ function App() {
     updatedBlogs[index] = updatedBlog;
     setBlogs(updatedBlogs);
     localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
-    navigate('/');
   };
 
   const handleAdd = (newBlog) => {
@@ -64,7 +63,6 @@ function App() {
     <>
       <NavBar />
       <Routes>
-
         <Route
           path="/"
           element={

@@ -22,7 +22,6 @@ const NavBar = () => {
           <Link to="/addBlog">
             <SquarePen className="mx-3 my-1" size={30} />
           </Link>
-          {/* <button className=" text-xl">Write</button> */}
         </div>
         <Bell className="mx-3 my-1" size={30} />
         <CircleUserRound className="mx-3 my-1" size={30} />
