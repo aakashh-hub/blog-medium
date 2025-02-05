@@ -6,6 +6,7 @@ import Card from "./components/Card";
 import BlogDetail from "./components/BlogDetail";
 import CoverPage from "./components/CoverPage";
 import Swal from "sweetalert2";
+import Authors from "./components/Authors";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -80,6 +81,7 @@ function App() {
         />
         <Route path="/addBlog" element={<CreateBlog onAddBlog={handleAdd} />} />
         <Route path="/blog/:index" element={<BlogDetail blogs={blogs} onUpdate={handleUpdate} />} />
+        <Route path="/authors" element={<Authors blogs={blogs}/>}/>
       </Routes>
     </>
   );

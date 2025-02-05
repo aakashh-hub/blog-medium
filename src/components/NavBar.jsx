@@ -24,7 +24,9 @@ const NavBar = () => {
           </Link>
         </div>
         <Bell className="mx-3 my-1" size={30} />
-        <CircleUserRound className="mx-3 my-1" size={30} />
+        <Link to="/authors">
+          <CircleUserRound className="mx-3 my-1" size={30} />
+        </Link>
       </div>
     </div>
   );
