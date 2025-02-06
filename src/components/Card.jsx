@@ -4,7 +4,7 @@ import { Trash2, Heart } from "lucide-react";
 
 const Card = ({ blog, index, onDelete, onLike }) => {
   return (
-    <Link to={`/blog/${index}`} className="flex bg-blue-50 border p-4 rounded-lg shadow-md my-4 transition delay-10 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-100 ">
+    <Link to={`/blog/${index}`} className="flex bg-blue-50 border p-4 rounded-lg shadow-md my-4 transition delay-10 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 ">
       <div className="flex-grow">
         <h2 className="text-xl font-bold">{blog.title}</h2>
         <p className="text-sm text-gray-600">By {blog.author}</p>
