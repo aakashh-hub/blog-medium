@@ -7,6 +7,7 @@ import BlogDetail from "./components/BlogDetail";
 import CoverPage from "./components/CoverPage";
 import Swal from "sweetalert2";
 import Authors from "./components/Authors";
+import SampleComponent from "./components/SampleComponent";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -63,7 +64,8 @@ function App() {
   return (
     <>
       <NavBar />
-      <Routes>
+      <SampleComponent/>
+      {/* <Routes>
         <Route
           path="/"
           element={
@@ -93,7 +95,7 @@ function App() {
             </div>
           }
         />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
