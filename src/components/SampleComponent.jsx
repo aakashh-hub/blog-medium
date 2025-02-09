@@ -15,7 +15,6 @@ const SampleComponent = () => {
     getData();
   }, []);
 
-
   return (
     <div>
       {

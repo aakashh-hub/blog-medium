@@ -1,44 +1,45 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const BlogDetail = ({ blogs, onUpdate }) => {
   const { index } = useParams();
-  const blog = blogs[index];
+  const [blog, setBlog] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedBlog, setEditedBlog] = useState({ ...blog });
-  const [newComment, setNewComment] = useState("");
+  const [editedBlog, setEditedBlog] = useState(null);
+
+  useEffect(() => {
+    if (blogs[index]) {
+      setBlog(blogs[index]);
+      setEditedBlog({ ...blogs[index] });
+    }
+  }, [blogs, index]);
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditedBlog({ ...editedBlog, [name]: value });
   };
 
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
-    onUpdate(index, editedBlog);
-    setIsEditing(false);
-    Swal.fire({
-      title: "Saved!",
-      text: "Your blog was updated!",
-      icon: "success"
-    });
-  };
-
-  const handleNewCommentChange = (e) => {
-    setNewComment(e.target.value);
-  };
-
-  const handleAddComment = (e) => {
-    e.preventDefault();
-    if (newComment.trim()) {
-      const updatedComments = [...editedBlog.comments, newComment];
-      setEditedBlog({ ...editedBlog, comments: updatedComments });
-      setNewComment("");
-      onUpdate(index, { ...editedBlog, comments: updatedComments });
+    try {
+      await axios.put(`http://localhost:3000/blogs/${editedBlog.id}`, editedBlog);
+      onUpdate(index, editedBlog);
+      setIsEditing(false);
+      Swal.fire({
+        title: "Saved!",
+        text: "Your blog was updated!",
+        icon: "success"
+      });
+    } catch (error) {
+      console.error("Error updating blog:", error);
     }
   };
+
+  if (!blog) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -60,6 +61,7 @@ const BlogDetail = ({ blogs, onUpdate }) => {
                 <input
                   type="text"
                   id="title"
+                  name="title"
                   value={editedBlog.title}
                   onChange={handleEditChange}
                   className="bg-gray-50 w-90 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
@@ -71,17 +73,19 @@ const BlogDetail = ({ blogs, onUpdate }) => {
                 </label>
                 <input
                   id="description"
+                  name="description"
                   value={editedBlog.description}
                   onChange={handleEditChange}
                   className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5"
                 />
               </div>
               <div>
-                <label htmlFor="blogcontent" className="block mb-2 text-md font-medium">
+                <label htmlFor="blogContent" className="block mb-2 text-md font-medium">
                   Blog Content
                 </label>
                 <textarea
-                  name="blogcontent"
+                  id="blogContent"
+                  name="blogContent"
                   value={editedBlog.blogContent}
                   onChange={handleEditChange}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
@@ -97,43 +101,20 @@ const BlogDetail = ({ blogs, onUpdate }) => {
         <div>
           <Link to="/" className="inline-flex items-center border border-black px-3 py-1.5 rounded-md text-black hover:bg-blue-50">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18">
-              </path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
             <span className="ml-1 font-bold text-lg">Back</span>
           </Link>
           <h1 className="flex text-5xl m-3 font-bold justify-center">{blog.title}</h1>
-          {blog.image && (
-            <img src={blog.image} alt="Blog" className="w-full my-4" />
+          {blog.imageUrl && (
+            <img src={blog.imageUrl} alt="Blog" className="w-full my-4" />
           )}
           <p className="text-sm text-gray-600">By {blog.author}</p>
-          {/* <p className="text-sm">{blog.description}</p> */}
           <p className="text-xl">{blog.blogContent}</p>
           <div className="flex gap-2 mt-2">
-            <button className="text-blue-500 hover:underline" onClick={() => onUpdate(index, { ...blog, likes: blog.likes + 1 })}>
-              Likes ({blog.likes})
-            </button>
             <button className="text-blue-500 hover:underline" onClick={() => setIsEditing(true)}>
               Edit
             </button>
-          </div>
-          <div className="mt-4">
-            <h3 className="text-lg font-bold">Comments</h3>
-            <ul>
-              {blog.comments.map((comment, i) => (
-                <li key={i} className="text-sm">{comment}</li>
-              ))}
-            </ul>
-            <form onSubmit={handleAddComment}>
-              <input
-                type="text"
-                value={newComment}
-                onChange={handleNewCommentChange}
-                className="border p-1 my-2 rounded-lg"
-                placeholder="Add a comment"
-              />
-              <button type="submit" className="mx-2 text-blue-500 hover:underline">Post</button>
-            </form>
           </div>
         </div>
       )}
